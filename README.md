@@ -64,6 +64,24 @@ To apply the new forwarded ports, simply restart the vm with:
 vagrant reload
 ```
 
+One a port is opened, you can access everything like you would normally on localhost. For example running a simple
+web server inside the vm once port 9999 is forwarded:
+
+```
+vagrant@alpine38:~ # python -m SimpleHTTPServer 9999
+```
+
+Then on your guest you would open http://localhost:9999 and could see something like this:
+
+```
+Directory listing for /
+.ash_history
+.bash_profile
+.profile
+.ssh/
+gohome/
+```
+
 # Mounted Folders
 
 Mount points can be added with (comma separated list):
