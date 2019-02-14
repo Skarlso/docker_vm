@@ -2,10 +2,10 @@
 set -e
 set -x
 
-mkdir /home/vagrant/gohome
-mkdir /home/vagrant/gohome/src
-mkdir /home/vagrant/gohome/bin
-mkdir /home/vagrant/gohome/pkg
+mkdir -p /home/vagrant/gohome
+mkdir -p /home/vagrant/gohome/src
+mkdir -p /home/vagrant/gohome/bin
+mkdir -p /home/vagrant/gohome/pkg
 
 sudo apk add --no-cache go
 

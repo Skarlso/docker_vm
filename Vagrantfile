@@ -7,6 +7,7 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.env.enable
+  config.vbguest.auto_update = false
   config.vm.box = 'maier/alpine-3.8-x86_64'
   config.vm.network 'forwarded_port', guest: 32_768, host: 32_768
   config.vm.network 'forwarded_port', guest: 8989, host: 8989
@@ -16,9 +17,13 @@ Vagrant.configure(2) do |config|
       config.vm.network 'forwarded_port', guest: port, host: port
     end
   end
-  config.vm.synced_folder 'data', '/vagrant_data', disabled: true
   config.vm.synced_folder '.', '/vagrant', disabled: true
-  # Customize the amount of memory on the VM:
+  if ENV['DOCKER_VM_MOUNTS']
+    mounts = ENV['DOCKER_VM_MOUNTS']
+    mounts.split(",").each do |mount|
+      config.vm.synced_folder mount, File.basename(mount)
+    end
+  end
   memory = ENV['DOCKER_VM_MEMORY'] || 6024
   cpus = ENV['DOCKER_VM_CPU'] || 2
   name = ENV['DOCKER_VM_NAME'] || 'docker_vm'

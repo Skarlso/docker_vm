@@ -8,12 +8,13 @@ This VM is thin and configurable and easy to set up / use.
 
 # Prerequisite
 
+Install [Vagrant](https://www.vagrantup.com/downloads.html).
+
 ```
 vagrant plugin install vagrant-alpine
 vagrant plugin install vagrant-env
+vagrant plugin install vagrant-vbguest
 ```
-
-And install [Vagrant](https://www.vagrantup.com/downloads.html).
 
 # Usage
 
@@ -57,4 +58,16 @@ The VM by default forwards port 8989 and 32768. Further ports can be defined as 
 DOCKER_VM_PORTS="1234,3155,333,1234"
 ```
 
-Unfortunately by the nature of a VM these will only be applied upon a restart if the vm happens to be running.
+To apply the new forwarded ports, simply restart the vm with:
+
+```
+vagrant reload
+```
+
+# Mounted Folders
+
+Mount points can be added with (comma separated list):
+
+```
+DOCKER_VM_MOUNTS="/home/user/my_data,/home/user/my_data2"
+```
